@@ -1,0 +1,8 @@
+.bounding_box{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+   border: 2px solid #149df2;
+}
