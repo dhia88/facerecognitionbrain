@@ -53,9 +53,10 @@ class App extends Component {
       route: "signin",
       isSignedIn: false,
       user: {
+        id: "",
         name: "",
         email: "",
-        entries: 0,
+        entries: "",
         joined: "",
       },
     };
@@ -66,6 +67,7 @@ class App extends Component {
   loadUser = (data) => {
     this.setState({
       user: {
+        id: data.id,
         name: data.name,
         email: data.email,
         entries: data.entries,
@@ -108,7 +110,20 @@ class App extends Component {
       returnClarifaiRequestOptions(this.state.input)
     )
       .then((response) => response.json())
-      .then((result) => this.displayFaceBox(this.calculateFaceLocation(result)))
+      .then((result) =>
+        this.displayFaceBox(this.calculateFaceLocation(result))
+      );
+    return fetch("http://localhost:3001/image", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: this.state.user.id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((count) => {
+        this.setState(Object.assign(this.state.user, { entries: count }));
+      })
       .catch((error) => console.log("error", error));
   }
 
@@ -133,7 +148,10 @@ class App extends Component {
         {route === "home" ? (
           <div>
             <Logo />
-            <Rank name={this.user.name} entries="this.user.entries" />
+            <Rank
+              name={this.state.user.name}
+              entries={this.state.user.entries}
+            />
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
@@ -143,7 +161,10 @@ class App extends Component {
         ) : route === "signin" ? (
           <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         ) : (
-          <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+          <Register
+            loadUser={this.loadUser}
+            onRouteChange={this.onRouteChange}
+          />
         )}
       </div>
     );
