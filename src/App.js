@@ -9,6 +9,7 @@ import Particle from "./components/Particles/Particle";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 
+
 const returnClarifaiRequestOptions = (imageUrl) => {
   const PAT = "3788c96223d04c8691da62b67bf746e6";
   const USER_ID = "dhia88";
@@ -56,6 +57,8 @@ class App extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onButtonSubmit = this.onButtonSubmit.bind(this);
   }
+
+
 
   calculateFaceLocation = (data) => {
     const clarifaiFace =
