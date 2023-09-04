@@ -102,7 +102,7 @@ class App extends Component {
     console.log(this.state.input);
   }
 
-  onButtonSubmit() {
+  async onButtonSubmit() {
     this.setState({ imageUrl: this.state.input }, () => {
       console.log(this.state.imageUrl);
     });
@@ -115,18 +115,19 @@ class App extends Component {
       .then((result) =>
         this.displayFaceBox(this.calculateFaceLocation(result))
       );
-    return fetch("http://localhost:3001/image", {
-      method: "put",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: this.state.user.id,
-      }),
-    })
-      .then((response) => response.json())
-      .then((count) => {
-        this.setState(Object.assign(this.state.user, { entries: count }));
-      })
-      .catch((error) => console.log("error", error));
+    try {
+      const response_1 = await fetch("http://localhost:3001/image", {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: this.state.user.id,
+        }),
+      });
+      const count = await response_1.json();
+      this.setState(Object.assign(this.state.user, { entries: count }));
+    } catch (error) {
+      return console.log("error", error);
+    }
   }
 
   onRouteChange = (route) => {
