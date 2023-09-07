@@ -24,7 +24,7 @@ class Register extends Component {
 
   onSubmitSignIn = (event) => {
     event.preventDefault();
-    fetch("http://dpg-cjs4br5m702s739psvtg-a.oregon-postgres.render.com/register", {
+    fetch("https://dpg-cjs4br5m702s739psvtg-a.oregon-postgres.render.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
