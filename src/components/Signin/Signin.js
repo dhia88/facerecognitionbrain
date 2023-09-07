@@ -19,7 +19,7 @@ class Signin extends Component {
 
   onSubmitSignIn = (event) => {
     event.preventDefault();
-    fetch("https://https://face-detect-api-vstc.onrender.com/signin", {
+    fetch("https://face-detect-api-vstc.onrender.com/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

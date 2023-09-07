@@ -24,7 +24,7 @@ class Register extends Component {
 
   onSubmitSignIn = (event) => {
     event.preventDefault();
-    fetch("https://https://face-detect-api-vstc.onrender.com/register", {
+    fetch("https://face-detect-api-vstc.onrender.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
