@@ -116,7 +116,7 @@ class App extends Component {
         this.displayFaceBox(this.calculateFaceLocation(result))
       );
     try {
-      const response_1 = await fetch("http://localhost:3001/image", {
+      const response_1 = await fetch("https://face-detect-api-vstc.onrender.com/image", {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
